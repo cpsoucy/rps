@@ -1,181 +1,111 @@
-function memory() {
-    if (localStorage.wins == undefined) localStorage.wins = 0;
-    if (localStorage.losses == undefined) localStorage.losses = 0;
-    if (localStorage.ties == undefined) localStorage.ties = 0;
+function play(choice) {
+    let pChoice = choice;
+    let oChoice = Math.floor(Math.random() * 3 + 1);
+    let wins = sessionStorage.getItem("winCount");
+    let ties = sessionStorage.getItem("tieCount");
+    let losses = sessionStorage.getItem("lossCount");
+    
+    document.getElementById('opponent_image').src = "";
+    document.getElementById('player_result').innerHTML = ". . .";
 
-    document.getElementById("win_number").innerHTML = localStorage.wins;
-    document.getElementById("lose_number").innerHTML = localStorage.losses;   
-    document.getElementById("tie_number").innerHTML = localStorage.tiess;
+    if (wins == null) {
+      wins = 0;
+    } else {
+      wins = wins;
+    }
 
-    function game(x) {
-        sessionStorage.playerChoice = x;
-        document.getElementById("rock").style.transform = "scale(1)";
-        document.getElementById("paper").style.transform = "scale(1)";
-        document.getElementById("scissors").style.transform = "scale(1)";
-        document.getElementById(sessionStorage.playerChoice).style.transform = "scale(1.4)";
+    if (ties == null) {
+      ties = 0;
+    } else {
+      ties = ties;
+    }
 
-        var y = Math.ceil(Math.random() * 3);
-
-        if (y == 1) sessionStorage.opponentChoice = "rock";
-        else if (y == 2) sessionStorage.opponentChoice = "paper";
-        else sessionStorage.opponentChoice = "scissors";
-
-        document.getElementById("opponentChoice").src = "img/" + sessionStorage.opponentChoice + ".svg";
-
-        if ((sessionStorage.opponentChoice == "rock") || (sessionStorage.opponentChoice == "paper")) {
-            document.getElementById("opponentChoice").style.height = "auto";
-            document.getElementById("opponentChoice").style.width = "7em";
-        }
-
-        else if (sessionStorage.opponentChoice == "scissors") {
-            document.getElementById("opponentChoice").style.height = "100%";
-            document.getElementById("opponentChoice").style.width = "auto";
-        }
-
-        document.getElementById("opponentChoice").style.animation = "expand .25s ease 0s forwards";
-        setTimeout(() => (document.getElementById("opponentChoice").style.animation = "none"), 250);
+    if (losses == null) {
+      losses = 0;
+    } else {
+      losses = losses;
+    }
    
-        if (sessionStorage.playerChoice == sessionStorage.opponentChoice) sessionStorage.result = "tie";
+    setTimeout(() => {
+      if (oChoice === 1 && pChoice === "rock") {
+        document.getElementById('opponent_image').src = "svg/rock.svg";
+        document.getElementById('player_result').innerHTML = "Rock matches rock. You tied.";
+        ties++;
+      } 
+      
+      else if (oChoice === 1 && pChoice === "scissors")  {
+        document.getElementById('opponent_image').src = "svg/rock.svg";
+        document.getElementById('player_result').innerHTML = "Scissors lose to rock. You lose.";
+        losses++;
+      } 
+      
+      else if (oChoice === 1 && pChoice === "paper") {
+        document.getElementById('opponent_image').src = "svg/rock.svg";
+        document.getElementById('player_result').innerHTML = "Paper beats rock. You win.";
+        wins++;
+      } 
+      
+      else if (oChoice === 2 && pChoice === "rock")  {
+        document.getElementById('opponent_image').src = "svg/paper.svg";
+        document.getElementById('player_result').innerHTML = "Rock loses to paper. You lose.";
+        losses++;
+      } 
+      
+      else if (oChoice === 2 && pChoice === "paper")  {
+        document.getElementById('opponent_image').src = "svg/paper.svg";
+        document.getElementById('player_result').innerHTML = "Paper matches paper. You tied.";
+        ties++;
 
-        else {
-            if (sessionStorage.playerChoice == "rock" && sessionStorage.opponentChoice == "paper") {
-                sessionStorage.result = "lose";
-            }
+      } else if (oChoice === 2 && pChoice === "scissors")  {
+        document.getElementById('opponent_image').src = "svg/paper.svg";
+        document.getElementById('player_result').innerHTML = "Scissors beat paper. You win.";
+        wins++;
 
-            else if (sessionStorage.playerChoice == "rock" && sessionStorage.opponentChoice == "scissors") {
-                sessionStorage.result = "win";
-            }
+      } else if (oChoice === 3 && pChoice === "rock")  {
+        document.getElementById('opponent_image').src = "svg/scissors.svg";
+        document.getElementById('player_result').innerHTML = "Rock beats scissors. You win.";
+        wins++;
 
-            else if (sessionStorage.playerChoice == "paper" && sessionStorage.opponentChoice == "rock") {
-                sessionStorage.result = "win";
-            }
+      } else if (oChoice === 3 && pChoice === "paper")  {
+        document.getElementById('opponent_image').src = "svg/scissors.svg";
+        document.getElementById('player_result').innerHTML = "Paper loses to scissors. You lose.";
+        losses++;
 
-            else if (sessionStorage.playerChoice == "paper" && sessionStorage.opponentChoice == "scissors") {
-                sessionStorage.result = "lose";
-            }
+      } else {
+        document.getElementById('opponent_image').src = "svg/scissors.svg";
+        document.getElementById('player_result').innerHTML = "Scissors match scissors. You tied.";
+        ties++;
+      }
 
-            else if (sessionStorage.playerChoice == "scissors" && sessionStorage.opponentChoice == "rock") {
-                sessionStorage.result = "lose";
-            }
+      sessionStorage.setItem("winCount", wins);
+      sessionStorage.setItem("tieCount", ties);
+      sessionStorage.setItem("lossCount", losses);
 
-            else sessionStorage.result = "win";
-        
-    }
-
-    document.getElementById("win").style.transform = "scale(1)";
-    document.getElementById("lose").style.transform = "scale(1)";
-    document.getElementById("tie").style.transform = "scale(1)";
-    //Scales the score number that is being increased up slightly
-    document.getElementById(sessionStorage.result).style.transform = "scale(1.1)";
-    //Removes the text shadows on all three score numbers
-    document.getElementById("winLabel").style.textShadow = "none";
-    document.getElementById("winNumber").style.textShadow = "none";
-    document.getElementById("loseLabel").style.textShadow = "none";
-    document.getElementById("loseNumber").style.textShadow = "none";
-    document.getElementById("tieLabel").style.textShadow = "none";
-    document.getElementById("tieNumber").style.textShadow = "none";
-    //Adds a text shadow to the score number that is being increased
-    document.getElementById(sessionStorage.result + "Label").style.textShadow = "0 0 5em var(--fire3)";
-    document.getElementById(sessionStorage.result + "Number").style.textShadow = "0 0 5em var(--fire3)";
-
-    if (sessionStorage.result == "win") {
-        //Displays a winning message
-        document.getElementById("message").innerHTML = "Congrats, you won this round!";
-        //Increases the number of wins by 1
-        localStorage.wins++;
-        //Sets the number of wins displayed equal to the number stored in the browser
-        document.getElementById("winNumber").innerHTML = localStorage.wins;
-    }
-
-    else if (sessionStorage.result == "lose") {
-        //Displays a losing message
-        document.getElementById("message").innerHTML = "Aww, you lost. Want to try again?";
-        //Increases the number of losses by 1
-        localStorage.losses++;
-        //Sets the number of losses displayed equal to the number stored in the browser
-        document.getElementById("loseNumber").innerHTML = localStorage.losses;
-    }
-
-    else if (sessionStorage.result == "tie") {
-        //Displays a tie message
-        document.getElementById("message").innerHTML = "It's a tie! Play again to break it!";
-        //Increases the number of ties by 1
-        localStorage.ties++;
-        //Sets the number of ties displayed equal to the number stored in the browser
-        document.getElementById("tieNumber").innerHTML = localStorage.ties;
-    }
-
-    document.getElementById("win").style.transform = "scale(1)";
-    document.getElementById("lose").style.transform = "scale(1)";
-    document.getElementById("tie").style.transform = "scale(1)";
-    //Scales the score number that is being increased up slightly
-    document.getElementById(sessionStorage.result).style.transform = "scale(1.1)";
-    //Removes the text shadows on all three score numbers
-    document.getElementById("winLabel").style.textShadow = "none";
-    document.getElementById("winNumber").style.textShadow = "none";
-    document.getElementById("loseLabel").style.textShadow = "none";
-    document.getElementById("loseNumber").style.textShadow = "none";
-    document.getElementById("tieLabel").style.textShadow = "none";
-    document.getElementById("tieNumber").style.textShadow = "none";
-    //Adds a text shadow to the score number that is being increased
-    document.getElementById(sessionStorage.result + "Label").style.textShadow = "0 0 5em var(--fire3)";
-    document.getElementById(sessionStorage.result + "Number").style.textShadow = "0 0 5em var(--fire3)";
-    if (sessionStorage.result == "win") {
-      //Displays a winning message
-      document.getElementById("message").innerHTML = "Congrats, you won this round!";
-      //Increases the number of wins by 1
-      localStorage.wins++;
-      //Sets the number of wins displayed equal to the number stored in the browser
-      document.getElementById("winNumber").innerHTML = localStorage.wins;
-    }
-    else if (sessionStorage.result == "lose") {
-      //Displays a losing message
-      document.getElementById("message").innerHTML = "Aww, you lost. Want to try again?";
-      //Increases the number of losses by 1
-      localStorage.losses++;
-      //Sets the number of losses displayed equal to the number stored in the browser
-      document.getElementById("loseNumber").innerHTML = localStorage.losses;
-    }
-    else if (sessionStorage.result == "tie") {
-      //Displays a tie message
-      document.getElementById("message").innerHTML = "It's a tie! Play again to break it!";
-      //Increases the number of ties by 1
-      localStorage.ties++;
-      //Sets the number of ties displayed equal to the number stored in the browser
-      document.getElementById("tieNumber").innerHTML = localStorage.ties;
-    }
-  
-  //Resets the score to 0
-  function reset() {
-    //Scales all three player's choice icons down to their normal size
-    document.getElementById("rock").style.transform = "scale(1)";
-    document.getElementById("paper").style.transform = "scale(1)";
-    document.getElementById("scissors").style.transform = "scale(1)";
-    //Changes the opponent's choice image to a question mark
-    document.getElementById("opponentChoice").src = "img/questionMark.svg";
-    //Sets the dimensions of the opponent's choice image
-    document.getElementById("opponentChoice").style.height = "100%";
-    document.getElementById("opponentChoice").style.width = "auto";
-    //Displays a good luck message
-    document.getElementById("message").innerHTML = "Best of luck!";
-    //Scales all three score numbers down to their normal size
-    document.getElementById("win").style.transform = "scale(1)";
-    document.getElementById("lose").style.transform = "scale(1)";
-    document.getElementById("tie").style.transform = "scale(1)";
-    //Removes the text shadows on all three score numbers
-    document.getElementById("winLabel").style.textShadow = "none";
-    document.getElementById("winNumber").style.textShadow = "none";
-    document.getElementById("loseLabel").style.textShadow = "none";
-    document.getElementById("loseNumber").style.textShadow = "none";
-    document.getElementById("tieLabel").style.textShadow = "none";
-    document.getElementById("tieNumber").style.textShadow = "none";
-    //Sets the wins, losses, and ties in the browser to 0 and changes the numbers displayed to match them
-    localStorage.wins = 0;
-    document.getElementById("winNumber").innerHTML = localStorage.wins;
-    localStorage.losses = 0;
-    document.getElementById("loseNumber").innerHTML = localStorage.losses;
-    localStorage.ties = 0;
-    document.getElementById("tieNumber").innerHTML = localStorage.ties;
+      document.getElementById('wins').innerHTML = sessionStorage.getItem("winCount");
+      document.getElementById('ties').innerHTML = sessionStorage.getItem("tieCount");
+      document.getElementById('losses').innerHTML = sessionStorage.getItem("lossCount");
+    }, 200);
   }
+
+  function reset() {
+    sessionStorage.setItem("winCount", 0);
+    sessionStorage.setItem("tieCount", 0);
+    sessionStorage.setItem("lossCount", 0);
+
+    document.getElementById('wins').innerHTML = sessionStorage.getItem("winCount");
+    document.getElementById('ties').innerHTML = sessionStorage.getItem("tieCount");
+    document.getElementById('losses').innerHTML = sessionStorage.getItem("lossCount");
+    document.getElementById('player_result').innerHTML = "Result";
+    document.getElementById('opponent_image').src = "svg/mystery.svg";
+  }
+
+//clears sessionStorage if the page is refreshed:
+window.onbeforeunload = function reload_check() {
+    sessionStorage.setItem("origin", window.location.href);
 }
+
+window.onload = function reload() {
+  if (window.location.href == sessionStorage.getItem("origin")) {
+      sessionStorage.clear();
+  }
 }
