@@ -1,94 +1,117 @@
 /* Checklist:
-    1) Add media queries, ensure screen looks nice at half screen and especially at mobile view; 
-    2) Remove dotted line pattern, replace with something else, bold line? Change line color? etc;
-    3) Make it so when the opponent is choosing an option, the text "Opponent chooses" doesn't center, and stays where it is at start;
-    4) Find nice background/foreground colors that complement each other well;
-    5) Fix title, make it look nice;
-    6) Smooth sharp edges on all three boxes, round corners;
-    7) Change sizing of boxes, make it look more proportional and fit better on one screen properly;
-    8) Change score counter styling?
+    1) Make it so when the opponent is choosing an option, the text "Opponent chooses" doesn't center, and stays where it is at start;
+    2) Find nice background/foreground colors that complement each other well;
+    3) Fix title, make it look nice;
+    4) Change sizing of boxes, make it look more proportional and fit better on one screen properly;
+    5) does new sizing work with mobile view? In mobile view make sure everything is small enough to fit onto one screen;
+    6) change spacing between boxes for mobile & full view;
+    7) Change score counter styling?
 */
 
 body {
   width: 65%;
   margin: auto;
-  background-color: #82835e;
+  background-color: #9da068;
 }
+
+h1 {
+  padding-top: 2rem;
+}
+
 h1, h2 {
   text-align: center;
+}
+
+h4 {
+  text-align: center;
+  font-size: x-large;
 }
 
 section {
   border: 2px solid #333;
   margin: 1rem 0;
   padding: 1rem;
-  background-color: rgb(119, 121, 113);
+  background-color: rgb(164, 165, 159);
 }
+
 main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
 }
+
 main section {
+  border-radius: 1em;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 .images {
   width: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
+
 .images img {
   opacity: 50%;
   transition: all .3s ease-in-out;
   cursor: pointer;
 }
+
 .images img:hover {
   opacity: 100%;
 }
+
 section.scoreboard {
-  border-style: dashed;
+  border-radius: 1em;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 1rem;
 }
-@media screen and (max-width: 768px)  {
-  main {grid-template-columns: 1fr;}
-  main img {transform: scale(.9);}
-}
+
 #player_result {
-  border-bottom: 2px dotted #AAA;
+  border-bottom: solid;
   padding-bottom: 1rem;
   grid-column-start: 1;
   grid-column-end: 4;
 }
+
 .score {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 #wins, #losses, #ties {
   font-size: 2rem;
   font-weight: 800;
   line-height: 1;
   margin-bottom: .25rem;
 }
+
 p.label {
   line-height: 1;
   margin-top: 0;
 }
+
 .reset {
   grid-column-start: 1;
   grid-column-end: 4;
   text-align: center;
   margin-top: 1rem;
 }
+
 .reset button {
   padding: .25rem .5rem;
   cursor: pointer;
   transition: all .3s ease-in-out;
+}
+
+@media screen and (max-width: 1000px)  {
+  main {grid-template-columns: 1fr;}
+  main img {transform: scale(.9);}
 }
