@@ -1,21 +1,22 @@
 /* Checklist:
     1) Make it so when the opponent is choosing an option, the text "Opponent chooses" doesn't center, and stays where it is at start;
-    2) Find nice background/foreground colors that complement each other well;
     3) Fix title, make it look nice;
     4) Change sizing of boxes, make it look more proportional and fit better on one screen properly;
     5) does new sizing work with mobile view? In mobile view make sure everything is small enough to fit onto one screen;
     6) change spacing between boxes for mobile & full view;
-    7) Change score counter styling?
+    7) By 475 px, change player options to be vertical instead of horizontal;
+    8) Change score counter styling?
 */
 
 body {
   width: 65%;
   margin: auto;
-  background-color: #9da068;
+  background-color: #70c55a;
 }
 
 h1 {
   padding-top: 2rem;
+  color: rgb(9, 70, 32);
 }
 
 h1, h2 {
@@ -28,10 +29,10 @@ h4 {
 }
 
 section {
-  border: 2px solid #333;
+  border: 3px solid rgb(9, 70, 32);
   margin: 1rem 0;
   padding: 1rem;
-  background-color: rgb(164, 165, 159);
+  background-color: rgb(184, 184, 184);
 }
 
 main {
@@ -74,6 +75,7 @@ section.scoreboard {
 
 #player_result {
   border-bottom: solid;
+  border-color: rgb(9, 70, 32);
   padding-bottom: 1rem;
   grid-column-start: 1;
   grid-column-end: 4;

@@ -1,10 +1,12 @@
 function play(choice) {
+    //assigning all necessary variables;
     let pChoice = choice;
     let oChoice = Math.floor(Math.random() * 3 + 1);
     let wins = sessionStorage.getItem("winCount");
     let ties = sessionStorage.getItem("tieCount");
     let losses = sessionStorage.getItem("lossCount");
     
+    //
     document.getElementById('opponent_image').src = "";
     document.getElementById('player_result').innerHTML = ". . .";
 
