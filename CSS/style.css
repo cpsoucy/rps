@@ -1,5 +1,5 @@
 /* Checklist:
-    1) Make it so when the opponent is choosing an option, the text "Opponent chooses" doesn't center, and stays where it is at start;
+    1) Make player & opponent box line up properly, so text & images from both boxes are lined up;
     3) Fix title, make it look nice;
     4) Change sizing of boxes, make it look more proportional and fit better on one screen properly;
     5) does new sizing work with mobile view? In mobile view make sure everything is small enough to fit onto one screen;
@@ -24,8 +24,10 @@ h1, h2 {
 }
 
 h4 {
-  text-align: center;
   font-size: x-large;
+  margin-bottom: 1rem;
+  position: fixed;
+  padding-bottom: 7rem;
 }
 
 section {
@@ -47,6 +49,14 @@ main section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.ochoice {
+  height: 199px;
+}
+
+.mystery_image {
+  margin-top: 3.5rem;
 }
 
 .images {
