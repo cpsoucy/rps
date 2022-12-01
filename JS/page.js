@@ -6,7 +6,6 @@ function play(choice) {
     let ties = sessionStorage.getItem("tieCount");
     let losses = sessionStorage.getItem("lossCount");
     
-    //
     document.getElementById('opponent_image').src = "";
     document.getElementById('player_result').innerHTML = ". . .";
 
